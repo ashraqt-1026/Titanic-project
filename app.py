@@ -20,7 +20,7 @@ ORDERS = {"class": ["First", "Second", "Third"], "survival": ["Died", "Survived"
 COLORS = {"Died": "#D95D4A", "Survived": "#0F766E"}
 
 
-classes = st.multiselect("select class", df["class"].unique())
+classes = st.multiselect("select class", df["class"].unique(), default = df["class"].unique())
 gender = st.radio("select class", df['sex'].unique(), horizontal = True)
 
 data = df[(df["class"].isin(classes)) & (df["sex"] == gender)]
@@ -28,26 +28,11 @@ data = df[(df["class"].isin(classes)) & (df["sex"] == gender)]
 show_data = st.checkbox("show sample data")
 if show_data:
     st.dataframe(df, hide_index=True)
-'''c1, c2 = st.columns(2)
+c1, c2 = st.columns(2)
 with c1:
     fig = px.histogram(data, x = 'family_size')
     st.plotly_chart(fig)
 with c2:
     outcome = data['survived'].value_counts()
     fig2 = px.pie(names =['died', 'survived'], values = outcome.values,  hole=0.4)
-    st.plotly_chart(fig2)'''
-
-
-
-#st.write("hello from titanic.app")
-st.radio("select number", [1, 2, 3], index = 0)
-checked  = st.checkbox("check me out")
-if checked:
-    st.write("you checked me")
-with st.form("search"):
-    name = st.text_input("Name_contains", placeholder = "e.g. Allen")
-    classes = st.multiselect("CLass", [1, 2, 3], default = [1, 2, 3])
-    ages = st.slider("Age", 0, 80, (0, 80))
-    submitted = st.form_submit_button("Search")
-if submitted:
-    st.write(f"you searched for {name} in classes {classes} and ages {ages}")
+    st.plotly_chart(fig2)
